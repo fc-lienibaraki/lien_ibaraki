@@ -27,18 +27,17 @@
                     },
                     colors: {
                         brand: {
-                            navy: '#050f21',      /* さらに深く高級感のあるプレミアムネイビー */
-                            navyDark: '#020710',  /* ほぼ黒に近い漆黒ネイビー */
-                            gold: '#c59b27',      /* 重厚なゴールド */
-                            goldDark: '#a3791a',  /* 影となるダークゴールド */
-                            goldLight: '#e6c875', /* 輝きを放つライトゴールド */
-                            cream: '#faf8f5',     /* ベースとなる洗練されたオフホワイト */
+                            navy: '#050f21',
+                            navyDark: '#020710',
+                            gold: '#c59b27',
+                            goldDark: '#a3791a',
+                            goldLight: '#e6c875',
+                            cream: '#faf8f5',
                         }
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'spin-slow': 'spin 12s linear infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         float: {
@@ -51,13 +50,9 @@
         }
     </script>
     <style>
-        /* Custom scrollbar in Navy and Gold */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050f21;
-        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050f21; }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, #c59b27, #a3791a);
             border: 2px solid #050f21;
@@ -73,60 +68,63 @@
             animation: shine 4s linear infinite;
         }
 
-        /* Gold metallic background gradient */
-        .gold-bg-gradient {
-            background: linear-gradient(135deg, #e6c875 0%, #c59b27 50%, #a3791a 100%);
-        }
-
-        /* Border with gold gradient */
-        .gold-border {
-            border-image: linear-gradient(to right, #a3791a, #e6c875, #a3791a) 1;
-        }
-
         @keyframes shine {
-            to {
-                background-position: 200% center;
-            }
+            to { background-position: 200% center; }
         }
 
-        /* Brush strokes matching Instagram style */
+        /* Brush strokes */
         .brush-top-right {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M150,100 Q250,50 400,150 T500,50 L500,0 L150,0 Z' fill='%23050f21'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: top right;
         }
+
+        /* SPA View Transitions */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page-view.active-view {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Navigation active state */
+        .nav-link.active {
+            color: #e6c875; /* goldLight */
+            border-bottom: 2px solid #c59b27;
+        }
     </style>
 </head>
 <body class="bg-brand-cream text-brand-navy font-sans selection:bg-brand-navy selection:text-white overflow-x-hidden">
 
-    <!-- HEADER (High-end Luxury Header with Gold Accent) -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-brand-navy/95 backdrop-blur-md border-b-2 border-brand-gold/30 transition-all duration-300" id="main-header">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-brand-navy/95 backdrop-blur-md border-b-2 border-brand-gold/30 transition-all duration-300 shadow-2xl" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center space-x-3 group">
-                <!-- Round Emblem wrapper matching the logo -->
+            <!-- Logo clicks back to Home -->
+            <button onclick="switchTab('home')" class="flex items-center space-x-3 group focus:outline-none">
                 <div class="w-12 h-12 relative flex items-center justify-center p-0.5 rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark shadow-md">
                     <div class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
-                        <img src="logo.png" alt="FC LIEN IBARAKI" class="w-full h-full object-contain relative z-10" id="header-logo" onerror="this.style.display='none'; document.getElementById('header-fallback').classList.remove('hidden');">
-                        <div id="header-fallback" class="hidden w-full h-full bg-brand-navy text-brand-goldLight flex items-center justify-center font-oswald font-bold text-xl group-hover:text-white transition-colors">
-                            L
-                        </div>
+                        <img src="logo.png" alt="FC LIEN IBARAKI" class="w-full h-full object-contain relative z-10" onerror="this.style.display='none'; document.getElementById('header-fallback').classList.remove('hidden');">
+                        <div id="header-fallback" class="hidden w-full h-full bg-brand-navy text-brand-goldLight flex items-center justify-center font-oswald font-bold text-xl group-hover:text-white transition-colors">L</div>
                     </div>
                 </div>
-                <div>
+                <div class="text-left">
                     <span class="text-xl font-oswald font-bold tracking-widest text-white group-hover:text-brand-goldLight transition-colors">FC LIEN IBARAKI</span>
                     <span class="block text-[9px] text-brand-goldLight font-bold tracking-widest uppercase">Est. 2026 / Football Club</span>
                 </div>
-            </a>
+            </button>
 
-            <!-- Desktop Nav (Gold & Navy theme) -->
+            <!-- Desktop Nav (Tab Switchers) -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#concept" class="text-gray-300 hover:text-brand-goldLight font-bold transition-colors text-sm uppercase tracking-wider">Concept</a>
-                <a href="#activity" class="text-gray-300 hover:text-brand-goldLight font-bold transition-colors text-sm uppercase tracking-wider">Activity</a>
-                <a href="#recruit" class="text-gray-300 hover:text-brand-goldLight font-bold transition-colors text-sm uppercase tracking-wider">Recruit</a>
-                <a href="#contact" class="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all text-sm shadow-lg tracking-wider">
+                <button onclick="switchTab('home')" class="nav-link active text-gray-300 hover:text-brand-goldLight font-bold transition-all text-sm uppercase tracking-wider py-2">HOME</button>
+                <button onclick="switchTab('team')" class="nav-link text-gray-300 hover:text-brand-goldLight font-bold transition-all text-sm uppercase tracking-wider py-2">TEAM & ACTIVITY</button>
+                <button onclick="switchTab('recruit')" class="nav-link text-gray-300 hover:text-brand-goldLight font-bold transition-all text-sm uppercase tracking-wider py-2">RECRUIT</button>
+                <button onclick="switchTab('recruit')" class="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all text-sm shadow-lg tracking-wider">
                     DM・お問い合わせ
-                </a>
+                </button>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -135,368 +133,454 @@
             </button>
         </div>
 
-        <!-- Mobile Drawer (Matches Premium Navy Dark) -->
+        <!-- Mobile Drawer -->
         <div class="hidden md:hidden bg-brand-navyDark border-t border-brand-gold/30 transition-all duration-300 px-4 py-6 shadow-2xl" id="mobile-menu">
             <div class="flex flex-col space-y-4">
-                <a href="#concept" class="mobile-link text-gray-200 font-bold py-2 text-base border-b border-gray-800 hover:text-brand-goldLight">TEAM CONCEPT</a>
-                <a href="#activity" class="mobile-link text-gray-200 font-bold py-2 text-base border-b border-gray-800 hover:text-brand-goldLight">活動について</a>
-                <a href="#recruit" class="mobile-link text-gray-200 font-bold py-2 text-base border-b border-gray-800 hover:text-brand-goldLight">募集要項</a>
-                <a href="#contact" class="mobile-link inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-black text-center mt-2 tracking-wider">
+                <button onclick="switchTab('home')" class="mobile-link text-gray-200 font-bold py-2 text-left text-base border-b border-gray-800 hover:text-brand-goldLight">HOME (トップ)</button>
+                <button onclick="switchTab('team')" class="mobile-link text-gray-200 font-bold py-2 text-left text-base border-b border-gray-800 hover:text-brand-goldLight">TEAM (選手・活動記録)</button>
+                <button onclick="switchTab('recruit')" class="mobile-link text-gray-200 font-bold py-2 text-left text-base border-b border-gray-800 hover:text-brand-goldLight">RECRUIT (募集要項)</button>
+                <button onclick="switchTab('recruit')" class="mobile-link inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-black text-center mt-2 tracking-wider">
                     DM・お問い合わせ
-                </a>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION (Highly integrated with logo colors, style & aesthetic) -->
-    <section class="relative min-h-screen pt-20 flex items-center justify-center overflow-hidden bg-brand-navy">
-        <!-- Subtle Dynamic Light (Gold flare behind the logo) -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-gold/15 rounded-full blur-[120px] animate-pulse-slow"></div>
+    <!-- ========================================== -->
+    <!-- 🟢 PAGE 1: HOME (Hero & Concept) -->
+    <!-- ========================================== -->
+    <main id="view-home" class="page-view active-view pt-20">
         
-        <!-- Large Decorative Background Text -->
-        <div class="absolute inset-0 flex items-center justify-center select-none pointer-events-none opacity-[0.02]">
-            <span class="font-oswald text-[20vw] font-black text-white tracking-widest">LIEN</span>
-        </div>
-
-        <!-- Brush strokes inspired by Instagram assets -->
-        <div class="absolute top-0 right-0 w-80 h-80 opacity-20 pointer-events-none brush-top-right"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 opacity-20 pointer-events-none transform rotate-180 brush-top-right"></div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center z-10 w-full">
-            
-            <!-- Grand Emblem Arena (Simplified and Clean) -->
-            <div class="mb-8 relative" data-aos="zoom-in" data-aos-duration="1200">
-                <!-- Rotating Golden Outer Ring mimicking the chain shape -->
-                <div class="absolute -inset-4 border border-dashed border-brand-gold/30 rounded-full animate-spin-slow pointer-events-none"></div>
-                
-                <!-- Main Logo frame: Rounded like the glorious shield-crest -->
-                <div class="relative w-48 h-48 sm:w-56 sm:h-56 p-1 bg-gradient-to-b from-brand-gold via-brand-goldLight to-brand-goldDark rounded-full shadow-2xl flex items-center justify-center overflow-hidden bg-brand-navy animate-float">
-                    <img src="logo.png" alt="FC LIEN IBARAKI Emblem" class="w-full h-full object-contain relative z-10" id="hero-logo" onerror="this.style.display='none'; document.getElementById('hero-fallback').classList.remove('hidden');">
-                    
-                    <div id="hero-fallback" class="hidden text-brand-goldLight relative z-10 flex flex-col items-center">
-                        <i data-lucide="shield" class="w-24 h-24 stroke-[1.2] mb-1"></i>
-                        <span class="font-oswald text-sm tracking-widest font-bold">EST. 2026</span>
-                    </div>
-                </div>
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-brand-navy">
+            <div class="absolute inset-0 flex items-center justify-center select-none pointer-events-none opacity-[0.02]">
+                <span class="font-oswald text-[20vw] font-black text-white tracking-widest">LIEN</span>
             </div>
+            <div class="absolute top-0 right-0 w-80 h-80 opacity-20 pointer-events-none brush-top-right"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 opacity-20 pointer-events-none transform rotate-180 brush-top-right"></div>
 
-            <!-- Main Title with Gold Text Shadow -->
-            <h1 class="font-oswald text-6xl sm:text-8xl lg:text-9xl font-black tracking-wider gold-text-gradient mb-6" data-aos="fade-up" data-aos-delay="200" style="text-shadow: 0 4px 20px rgba(197, 155, 39, 0.15);">
-                LIEN IBARAKI
-            </h1>
-
-            <!-- Subtitle with Serif Font & Instagram elegance -->
-            <div class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-10 space-y-4" data-aos="fade-up" data-aos-delay="400">
-                <p class="tracking-wide">新規チーム始動。</p>
-                <p class="text-brand-goldLight tracking-wider">初期メンバー募集開始！！</p>
-            </div>
-
-            <!-- Elegant Gold Chain Separator (Clean replacement of hashtags) -->
-            <div class="flex items-center space-x-4 mb-12" data-aos="fade-up" data-aos-delay="500">
-                <div class="w-16 h-[1px] bg-gradient-to-r from-transparent to-brand-gold"></div>
-                <div class="text-brand-goldLight"><i data-lucide="award" class="w-6 h-6"></i></div>
-                <div class="w-16 h-[1px] bg-gradient-to-l from-transparent to-brand-gold"></div>
-            </div>
-
-            <!-- Instagram ID & Elite Action Buttons -->
-            <div class="flex flex-col items-center mb-10" data-aos="fade-up" data-aos-delay="600">
-                <div class="text-base font-bold text-brand-goldLight mb-6 tracking-[0.3em] font-sans uppercase">@lien_ibaraki</div>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#contact" class="px-12 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black uppercase tracking-widest hover:-translate-y-1 transition-all flex items-center justify-center space-x-3 shadow-2xl shadow-brand-gold/20">
-                        <span>入部・体験を希望する</span>
-                        <i data-lucide="chevron-right" class="w-5 h-5 stroke-[3]"></i>
-                    </a>
-                    <a href="#concept" class="px-12 py-4 bg-brand-navy/60 border-2 border-brand-gold text-brand-goldLight font-bold uppercase tracking-wider hover:bg-brand-gold/10 hover:text-white transition-all flex items-center justify-center">
-                        CONCEPT
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- TEAM CONCEPT & LIEN SECTION (Perfectly Centered Title and Rebranded Cards) -->
-    <section id="concept" class="py-24 relative bg-brand-navyDark border-t-2 border-b-2 border-brand-gold/40 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-navy to-brand-navyDark opacity-50"></div>
-        
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            
-            <!-- Vertically Stacked Concept Title -->
-            <div class="flex flex-col items-center justify-center mb-6 space-y-1" data-aos="fade-up">
-                <span class="font-oswald text-4xl sm:text-5xl font-black tracking-widest text-white">CONCEPT</span>
-                <span class="font-serif text-3xl sm:text-4xl text-brand-goldLight font-normal">&</span>
-                <span class="font-oswald text-4xl sm:text-5xl font-black tracking-widest text-white">NAME ORIGIN</span>
-            </div>
-            <p class="text-xs text-brand-goldLight font-bold tracking-[0.4em] uppercase mb-16" data-aos="fade-up" data-aos-delay="100">チームコンセプトとLienの意味</p>
-
-            <!-- Grid Layout containing two premium cards (Concept & Name Origin) -->
-            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch max-w-5xl mx-auto">
-                
-                <!-- CARD 1: CONCEPT (Rebranded from PLAY STYLE) -->
-                <div class="bg-gradient-to-b from-brand-navy to-brand-navyDark p-6 sm:p-10 border-2 border-brand-gold/50 shadow-2xl relative flex flex-col justify-between" data-aos="fade-right" data-aos-delay="200">
-                    <!-- Gold Accent Corners -->
-                    <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-brand-gold/70"></div>
-                    <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-brand-gold/70"></div>
-                    <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-brand-gold/70"></div>
-                    <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-brand-gold/70"></div>
-
-                    <div>
-                        <span class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase block mb-4">CONCEPT</span>
-                        <div class="mb-6 overflow-hidden">
-                            <!-- Responsive scale font size text-[6vw] prevents breaking on small mobile screens -->
-                            <h3 class="font-serif text-[6vw] sm:text-2xl md:text-3xl font-bold tracking-wider text-brand-goldLight whitespace-nowrap inline-block px-2 py-2 border-b border-brand-gold/20">
-                                「真剣にエンジョイする」
-                            </h3>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center z-10 w-full">
+                <!-- Clean Emblem -->
+                <div class="mb-8 relative" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="absolute inset-2 border border-dashed border-brand-goldLight/30 rounded-full animate-spin-slow pointer-events-none"></div>
+                    <div class="relative w-48 h-48 sm:w-56 sm:h-56 p-1 bg-gradient-to-b from-brand-gold via-brand-goldLight to-brand-goldDark rounded-full shadow-2xl flex items-center justify-center overflow-hidden bg-brand-navy animate-float">
+                        <img src="logo.png" alt="FC LIEN IBARAKI Emblem" class="w-full h-full object-contain relative z-10" onerror="this.style.display='none'; document.getElementById('hero-fallback-main').classList.remove('hidden');">
+                        <div id="hero-fallback-main" class="hidden text-brand-goldLight relative z-10 flex flex-col items-center">
+                            <i data-lucide="shield" class="w-24 h-24 stroke-[1.2] mb-1"></i>
+                            <span class="font-oswald text-sm tracking-widest font-bold">EST. 2026</span>
                         </div>
-                        <p class="font-serif text-base sm:text-lg text-gray-200 leading-loose">
-                            部活ほどの競技志向ではないが、<br>サッカーを競技として真剣に楽しむチームを目指しています。
-                        </p>
                     </div>
                 </div>
 
-                <!-- CARD 2: NAME ORIGIN (Rebranded from COMMUNITY to focus on Lien's meaning) -->
-                <div class="bg-gradient-to-b from-brand-navy to-brand-navyDark p-6 sm:p-10 border-2 border-brand-gold/50 shadow-2xl relative flex flex-col justify-between" data-aos="fade-left" data-aos-delay="300">
-                    <!-- Gold Accent Corners -->
-                    <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-brand-gold/70"></div>
-                    <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-brand-gold/70"></div>
-                    <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-brand-gold/70"></div>
-                    <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-brand-gold/70"></div>
+                <h1 class="font-oswald text-6xl sm:text-8xl lg:text-9xl font-black tracking-wider gold-text-gradient mb-6" data-aos="fade-up" data-aos-delay="200" style="text-shadow: 0 4px 20px rgba(197, 155, 39, 0.15);">
+                    LIEN IBARAKI
+                </h1>
 
-                    <div>
-                        <span class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase block mb-4">NAME ORIGIN</span>
-                        <div class="mb-6 overflow-hidden">
-                            <h3 class="font-serif text-[6vw] sm:text-2xl md:text-3xl font-bold tracking-wider text-brand-goldLight whitespace-nowrap inline-block px-2 py-2 border-b border-brand-gold/20">
-                                最高の絆（LIEN）
-                            </h3>
+                <div class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-10 space-y-4" data-aos="fade-up" data-aos-delay="400">
+                    <p class="tracking-wide">新規チーム始動。</p>
+                    <p class="text-brand-goldLight tracking-wider">初期メンバー募集開始！！</p>
+                </div>
+
+                <div class="flex items-center space-x-4 mb-12" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-[1px] bg-gradient-to-r from-transparent to-brand-gold"></div>
+                    <div class="text-brand-goldLight"><i data-lucide="award" class="w-6 h-6"></i></div>
+                    <div class="w-16 h-[1px] bg-gradient-to-l from-transparent to-brand-gold"></div>
+                </div>
+
+                <!-- Action Buttons connecting to other views -->
+                <div class="flex flex-col items-center mb-10" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-base font-bold text-brand-goldLight mb-6 tracking-[0.3em] font-sans uppercase">@lien_ibaraki</div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                        <button onclick="switchTab('recruit')" class="px-12 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black uppercase tracking-widest hover:-translate-y-1 transition-all flex items-center justify-center space-x-3 shadow-2xl shadow-brand-gold/20">
+                            <span>入部・体験を希望する</span>
+                            <i data-lucide="chevron-right" class="w-5 h-5 stroke-[3]"></i>
+                        </button>
+                        <a href="#concept-section" class="px-12 py-4 bg-brand-navy/60 border-2 border-brand-gold text-brand-goldLight font-bold uppercase tracking-wider hover:bg-brand-gold/10 hover:text-white transition-all flex items-center justify-center">
+                            CONCEPT
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCEPT SECTION -->
+        <section id="concept-section" class="py-24 relative bg-brand-navyDark border-t-2 border-b-2 border-brand-gold/40 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy to-brand-navyDark opacity-50"></div>
+            
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="flex flex-col items-center justify-center mb-2 space-y-1" data-aos="fade-up">
+                    <span class="font-oswald text-4xl sm:text-5xl font-black tracking-widest text-white">CONCEPT</span>
+                    <span class="font-serif text-3xl sm:text-4xl text-brand-goldLight font-normal">&</span>
+                    <span class="font-oswald text-4xl sm:text-5xl font-black tracking-widest text-white">NAME ORIGIN</span>
+                </div>
+                <p class="text-xs text-brand-goldLight font-bold tracking-[0.4em] uppercase mb-16" data-aos="fade-up" data-aos-delay="100">チームコンセプトとLienの意味</p>
+
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch max-w-5xl mx-auto">
+                    <!-- CONCEPT -->
+                    <div class="bg-gradient-to-b from-brand-navy to-brand-navyDark p-6 sm:p-10 border-2 border-brand-gold/50 shadow-2xl relative flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-brand-gold/70"></div>
+                        <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-brand-gold/70"></div>
+                        <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-brand-gold/70"></div>
+                        <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-brand-gold/70"></div>
+                        <div>
+                            <span class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase block mb-4">CONCEPT</span>
+                            <div class="mb-6 overflow-hidden">
+                                <h3 class="font-serif text-[6vw] sm:text-2xl md:text-3xl font-bold tracking-wider text-brand-goldLight whitespace-nowrap inline-block px-2 py-2 border-b border-brand-gold/20">
+                                    「真剣にエンジョイする」
+                                </h3>
+                            </div>
+                            <p class="font-serif text-base sm:text-lg text-gray-200 leading-loose">
+                                部活ほどの競技志向ではないが、<br>サッカーを競技として真剣に楽しむチームを目指しています。
+                            </p>
                         </div>
-                        <p class="font-serif text-base sm:text-lg text-gray-200 leading-loose">
-                            フランス語で「絆・繋がり」を意味するLIEN。<br>一過性の集まりではなく、一生モノの仲間との絆を茨木市で築いていきます。
-                        </p>
                     </div>
-                </div>
 
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ACTIVITY SECTION (Classic layout with golden accents) -->
-    <section id="activity" class="py-28 relative bg-white">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-brand-navy inline-flex items-center space-x-3">
-                    <span class="text-brand-gold">【</span><span>活動について</span><span class="text-brand-gold">】</span>
-                </h2>
-                <div class="w-16 h-1 bg-brand-gold mx-auto mt-4"></div>
-            </div>
-
-            <div class="bg-brand-cream p-8 sm:p-14 shadow-2xl border-l-8 border-brand-gold text-center relative overflow-hidden" data-aos="zoom-in" data-aos-duration="800">
-                <!-- Watermark style emblem in background -->
-                <div class="absolute -right-20 -bottom-20 w-80 h-80 opacity-[0.03] pointer-events-none">
-                    <img src="logo.png" alt="" class="w-full h-full object-contain">
+                    <!-- NAME ORIGIN -->
+                    <div class="bg-gradient-to-b from-brand-navy to-brand-navyDark p-6 sm:p-10 border-2 border-brand-gold/50 shadow-2xl relative flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                        <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-brand-gold/70"></div>
+                        <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-brand-gold/70"></div>
+                        <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-brand-gold/70"></div>
+                        <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-brand-gold/70"></div>
+                        <div>
+                            <span class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase block mb-4">NAME ORIGIN</span>
+                            <div class="mb-6 overflow-hidden">
+                                <h3 class="font-serif text-[6vw] sm:text-2xl md:text-3xl font-bold tracking-wider text-brand-goldLight whitespace-nowrap inline-block px-2 py-2 border-b border-brand-gold/20">
+                                    最高の絆（LIEN）
+                                </h3>
+                            </div>
+                            <p class="font-serif text-base sm:text-lg text-gray-200 leading-loose">
+                                フランス語で「絆・繋がり」を意味するLIEN。<br>一過性の集まりではなく、一生モノの仲間との絆を茨木市で築いていきます。
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 
-                <p class="font-serif text-xl sm:text-3xl font-bold leading-loose text-brand-navy mb-8">
-                    2026年6月より活動を開始します。<br>
-                    目標は来年度に地域リーグへの参加をすることです。
-                </p>
-                
-                <p class="font-serif text-lg sm:text-2xl font-bold leading-loose text-brand-navy mb-10">
-                    サッカーを遊びではなく、真剣に楽しみたいという方、<br class="hidden sm:block">
-                    一緒に戦ってくださる方、大募集中です！！<br>
-                    <span class="block mt-4 text-2xl sm:text-4xl text-brand-goldDark font-black">一緒にサッカーしましょう！！</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- RECRUIT SECTION (Gold-framed elite conditions) -->
-    <section id="recruit" class="py-28 relative bg-brand-cream border-t border-gray-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-brand-navy inline-flex items-center">
-                    <span class="text-brand-gold mr-1">【</span>募集要項<span class="text-brand-gold ml-1">】</span>
-                </h2>
-                <div class="w-16 h-1 bg-brand-gold mx-auto mt-4"></div>
-            </div>
-
-            <div class="grid gap-8 text-center sm:text-left">
-                <!-- Condition 1 -->
-                <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 hover:border-brand-gold transition-all shadow-md group" data-aos="fade-right" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
-                        <i data-lucide="users" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
-                            <span class="text-brand-gold mr-2">✦</span>募集対象
-                        </h3>
-                        <p class="font-serif text-3xl font-bold text-brand-navy">高校生以上</p>
-                        <p class="font-sans text-sm text-gray-500 mt-2 font-bold">(未経験、ブランクOK / 真剣にやりたい方)</p>
-                    </div>
-                </div>
-
-                <!-- Condition 2 -->
-                <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 hover:border-brand-gold transition-all shadow-md group" data-aos="fade-right" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
-                        <i data-lucide="map-pin" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
-                            <span class="text-brand-gold mr-2">✦</span>活動場所
-                        </h3>
-                        <p class="font-serif text-2xl font-bold text-brand-navy leading-relaxed">
-                            茨木市周辺のグラウンド、<br class="sm:hidden">フットサルコート
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Condition 3 -->
-                <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 hover:border-brand-gold transition-all shadow-md group" data-aos="fade-right" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
-                        <i data-lucide="calendar" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
-                            <span class="text-brand-gold mr-2">✦</span>活動日時
-                        </h3>
-                        <p class="font-serif text-2xl font-bold text-brand-navy">
-                            土日祝中心 (週1回)
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Condition 4 -->
-                <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 hover:border-brand-gold transition-all shadow-md group" data-aos="fade-right" data-aos-delay="400">
-                    <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
-                        <i data-lucide="coins" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
-                            <span class="text-brand-gold mr-2">✦</span>費用
-                        </h3>
-                        <p class="font-serif text-2xl font-bold text-brand-navy">
-                            1回の活動参加につき 500〜1000円
-                        </p>
-                        <p class="font-sans text-sm text-gray-500 mt-2 font-bold">
-                            ※費用につきましてはあくまで目安になりますのでご了承ください
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT / DM SECTION (Navy Dark background with Gold highlights) -->
-    <section id="contact" class="py-28 relative bg-brand-navy text-white overflow-hidden">
-        <!-- Decoration light -->
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-6">参加希望・お問い合わせ</h2>
-                <p class="font-sans text-lg font-bold text-gray-300">
-                    参加希望の方はお気軽にDM、<br class="sm:hidden">または下記フォームよりご連絡ください！！
-                </p>
-                <div class="mt-8">
-                    <a href="https://instagram.com/lien_ibaraki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all shadow-2xl text-lg tracking-wider">
-                        <i data-lucide="instagram" class="w-6 h-6 mr-3 stroke-[2.5]"></i>
-                        InstagramでDMを送る
-                    </a>
-                </div>
-            </div>
-
-            <!-- Form Card with Gold Border Line matching the Crest style -->
-            <div class="bg-brand-navyDark border-2 border-brand-gold p-6 sm:p-12 shadow-2xl relative overflow-hidden font-sans rounded-sm" data-aos="fade-up" data-aos-delay="200">
-                <!-- Submit Success Overlay -->
-                <div id="form-success" class="hidden absolute inset-0 bg-brand-navyDark z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
-                    <div class="w-20 h-20 bg-brand-gold text-brand-navy flex items-center justify-center mb-6 rounded-full shadow-lg shadow-brand-gold/20">
-                        <i data-lucide="check" class="w-10 h-10 stroke-[3]"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-goldLight mb-2">送信が完了しました</h3>
-                    <p class="text-gray-300 mb-8 font-bold max-w-md">
-                        ご応募ありがとうございます。代表より、折り返しメールにてご連絡させていただきます。
-                    </p>
-                    <button onclick="resetContactForm()" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-bold transition-all text-sm tracking-wider">
-                        戻る
+                <div class="mt-16 text-center" data-aos="fade-in">
+                    <button onclick="switchTab('team')" class="inline-flex items-center text-brand-goldLight hover:text-white font-bold tracking-widest uppercase transition-colors">
+                        メンバー・活動風景を見る <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
                     </button>
                 </div>
+            </div>
+        </section>
+    </main>
 
-                <!-- Submit Error Overlay -->
-                <div id="form-error" class="hidden absolute inset-0 bg-brand-navyDark z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
-                    <div class="w-20 h-20 bg-red-500/10 text-red-500 flex items-center justify-center mb-6 rounded-full">
-                        <i data-lucide="alert-circle" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-red-500 mb-2">エラーが発生しました</h3>
-                    <p class="text-gray-300 mb-8 font-bold">
-                        正常に送信できませんでした。FormspreeのURLが正しく設定されているかご確認ください。
-                    </p>
-                    <button onclick="resetContactForm()" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-bold transition-all text-sm">
-                        やり直す
-                    </button>
+    <!-- ========================================== -->
+    <!-- 🔵 PAGE 2: TEAM & ACTIVITY -->
+    <!-- ========================================== -->
+    <main id="view-team" class="page-view pt-20">
+        
+        <!-- MEMBERS SECTION -->
+        <section class="py-24 bg-brand-cream border-b border-gray-100">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-oswald text-4xl sm:text-5xl font-black text-brand-navy tracking-widest">
+                        MEMBERS
+                    </h2>
+                    <div class="w-16 h-1 bg-brand-gold mx-auto mt-4"></div>
+                    <p class="text-xs text-gray-500 font-bold tracking-[0.3em] uppercase mt-4">選手・スタッフ</p>
                 </div>
 
-                <!-- ⚠️【重要】actionのダブルクォーテーション内をご自身のFormspreeのURL（例: https://formspree.io/f/xanyv...）に書き換えてください -->
-                <form id="contact-form" action="https://formspree.io/f/xanyvryq" method="POST" class="space-y-6" onsubmit="handleFormSubmit(event)">
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-bold text-brand-goldLight mb-2">お名前 <span class="text-red-500">*</span></label>
-                            <input type="text" name="お名前" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-center">
+                    <!-- 代表 (柳川瀬様) -->
+                    <div class="bg-white border-t-4 border-brand-navy p-6 shadow-xl text-center relative group" data-aos="fade-up">
+                        <div class="absolute top-4 right-4 bg-brand-navy text-brand-goldLight text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-widest">REPRESENTATIVE</div>
+                        <div class="w-28 h-28 mx-auto relative p-1 rounded-full bg-gradient-to-r from-brand-gold to-brand-goldLight mb-6 shadow-md">
+                            <div class="w-full h-full bg-brand-cream rounded-full overflow-hidden flex items-center justify-center">
+                                <i data-lucide="user-check" class="w-12 h-12 text-brand-navy/60"></i>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-brand-goldLight mb-2">年齢 <span class="text-red-500">*</span></label>
-                            <input type="number" name="年齢" required min="15" class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
-                        </div>
+                        <div class="font-oswald text-2xl font-black text-brand-gold tracking-widest">#10</div>
+                        <h3 class="font-serif text-2xl font-black text-brand-navy mb-1">柳川瀬</h3>
+                        <p class="text-xs text-gray-500 font-bold tracking-widest uppercase mb-4">MF / 代表・初期メンバー</p>
+                        <div class="w-8 h-[1px] bg-brand-gold/30 mx-auto mb-4"></div>
+                        <p class="font-serif text-sm text-gray-600 leading-relaxed italic">
+                            「サッカーを本気で楽しみたい方、最高のチームをここ茨木で一緒に創り上げましょう！」
+                        </p>
                     </div>
 
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-bold text-brand-goldLight mb-2">メールアドレス <span class="text-red-500">*</span></label>
-                            <input type="email" name="email" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                    <!-- Wanted Card -->
+                    <div class="bg-brand-navy border-2 border-dashed border-brand-gold/40 p-6 shadow-lg text-center relative flex flex-col justify-center items-center py-12" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-20 h-20 bg-brand-navyDark border border-brand-gold/30 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="user-plus" class="w-8 h-8 text-brand-goldLight animate-pulse"></i>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-brand-goldLight mb-2">経験の有無 <span class="text-red-500">*</span></label>
-                            <select name="経験の有無" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
-                                <option value="" class="text-gray-400">選択してください</option>
-                                <option value="経験者（部活・クラブ等）">経験者（部活・クラブ等）</option>
-                                <option value="経験者（ブランクあり）">経験者（ブランクあり）</option>
-                                <option value="未経験・初心者">未経験・初心者</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold text-brand-goldLight mb-2">メッセージ・質問など</label>
-                        <textarea name="メッセージ・質問など" rows="4" class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
-                    </div>
-
-                    <div class="pt-4 text-center">
-                        <button type="submit" class="w-full sm:w-auto px-16 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all text-lg shadow-xl tracking-widest">
-                            送信する
+                        <span class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase mb-2">INITIAL MEMBERS</span>
+                        <h3 class="font-serif text-xl font-bold text-white mb-4">初期メンバー大募集中！</h3>
+                        <p class="font-serif text-xs text-gray-300 leading-relaxed max-w-[200px] mx-auto mb-6">
+                            創設メンバーを募集中です。<br>あなたのプロフィールカードがここに並びます！
+                        </p>
+                        <button onclick="switchTab('recruit')" class="px-6 py-2 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy text-xs font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-md">
+                            エントリー ➔
                         </button>
                     </div>
-                </form>
-            </div>
-            
-            <!-- 代表者情報 -->
-            <div class="text-center mt-16" data-aos="fade-in" data-aos-delay="400">
-                <p class="font-serif text-2xl font-bold text-brand-goldLight">Lien茨木代表 柳川瀬</p>
-                
-                <div class="mt-4 flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8 font-sans text-sm text-gray-400">
-                    <a href="mailto:atusimaru.0807@gmail.com" class="flex items-center hover:text-brand-goldLight transition-colors">
-                        <i data-lucide="mail" class="w-4 h-4 mr-2 text-brand-gold"></i> atusimaru.0807@gmail.com
-                    </a>
-                    <a href="tel:08036760807" class="flex items-center hover:text-brand-goldLight transition-colors">
-                        <i data-lucide="phone" class="w-4 h-4 mr-2 text-brand-gold"></i> 080-3676-0807
-                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- ACTIVITY & GALLERY -->
+        <section class="py-24 relative bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-oswald text-4xl sm:text-5xl font-black text-brand-navy tracking-widest">
+                        ACTIVITY & GALLERY
+                    </h2>
+                    <div class="w-16 h-1 bg-brand-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="bg-brand-cream p-8 sm:p-14 shadow-2xl border-l-8 border-brand-gold text-center relative overflow-hidden mb-16" data-aos="zoom-in">
+                    <div class="absolute -right-20 -bottom-20 w-80 h-80 opacity-[0.03] pointer-events-none">
+                        <img src="logo.png" alt="" class="w-full h-full object-contain">
+                    </div>
+                    <p class="font-serif text-xl sm:text-3xl font-bold leading-loose text-brand-navy mb-8">
+                        2026年6月より活動を開始します。<br>
+                        目標は来年度に地域リーグへの参加をすることです。
+                    </p>
+                    <p class="font-serif text-lg sm:text-2xl font-bold leading-loose text-brand-navy">
+                        サッカーを遊びではなく、真剣に楽しみたい方、<br class="hidden sm:block">
+                        一緒に戦ってくださる方、大募集中です！！
+                    </p>
+                </div>
+
+                <!-- Gallery Teaser -->
+                <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+                    <div class="bg-brand-navy border border-brand-gold/30 p-12 relative overflow-hidden flex flex-col items-center justify-center min-h-[250px] shadow-lg">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#c59b27_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <div class="relative z-10 space-y-4">
+                            <i data-lucide="instagram" class="w-12 h-12 text-brand-goldLight mx-auto animate-pulse"></i>
+                            <h4 class="font-serif text-lg text-white font-bold">活動風景は公式Instagramにて公開！</h4>
+                            <p class="text-xs text-gray-300 font-sans max-w-md mx-auto leading-relaxed">
+                                活動開始後、日々の練習や集合写真をここに掲載予定です。最新の活動状況はInstagramをチェックしてください！
+                            </p>
+                            <div class="pt-4">
+                                <a href="https://instagram.com/lien_ibaraki" target="_blank" class="inline-flex items-center justify-center px-6 py-2.5 border border-brand-goldLight text-brand-goldLight text-xs font-bold hover:bg-brand-goldLight hover:text-brand-navy transition-all uppercase tracking-widest">
+                                    @lien_ibaraki をフォロー ➔
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATCH RESULTS -->
+        <section class="py-24 bg-brand-navyDark text-white border-t-2 border-b-2 border-brand-gold/40 relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-oswald text-4xl sm:text-5xl font-black tracking-widest text-white">
+                        MATCH RESULTS
+                    </h2>
+                    <div class="w-16 h-[1px] bg-brand-gold mx-auto mt-4"></div>
+                    <p class="text-xs text-brand-goldLight font-bold tracking-[0.3em] uppercase mt-4">試合日程・結果</p>
+                </div>
+
+                <div class="bg-brand-navy border border-brand-gold/50 p-8 sm:p-12 text-center relative max-w-2xl mx-auto shadow-2xl" data-aos="zoom-in">
+                    <div class="absolute top-2 left-2 w-3 h-3 border-t border-l border-brand-goldLight/50"></div>
+                    <div class="absolute top-2 right-2 w-3 h-3 border-t border-r border-brand-goldLight/50"></div>
+                    <div class="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-brand-goldLight/50"></div>
+                    <div class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-brand-goldLight/50"></div>
+
+                    <span class="text-[10px] bg-brand-gold text-brand-navy font-black px-4 py-1 tracking-[0.2em] rounded-sm uppercase mb-4 inline-block">2026.06 START</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-brand-goldLight mb-4 leading-relaxed">
+                        歴史はここから始まる。
+                    </h3>
+                    <p class="font-serif text-sm sm:text-base text-gray-300 leading-loose max-w-lg mx-auto">
+                        2026年6月の活動開始後、リーグ戦や練習試合などの詳細結果をここに掲載していきます。<br>
+                        <span class="text-white font-black block mt-2 text-base">共に初勝利の瞬間を創り上げる仲間を募集中！</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 🟡 PAGE 3: RECRUIT & CONTACT -->
+    <!-- ========================================== -->
+    <main id="view-recruit" class="page-view pt-20">
+        
+        <!-- RECRUIT INFO -->
+        <section class="py-24 relative bg-brand-cream border-b border-gray-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-oswald text-4xl sm:text-5xl font-black text-brand-navy tracking-widest">
+                        RECRUIT
+                    </h2>
+                    <div class="w-16 h-1 bg-brand-gold mx-auto mt-4"></div>
+                    <p class="text-xs text-gray-500 font-bold tracking-[0.3em] uppercase mt-4">募集要項</p>
+                </div>
+
+                <div class="grid gap-6 text-center sm:text-left">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                            <i data-lucide="users" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
+                                <span class="text-brand-gold mr-2">✦</span>募集対象
+                            </h3>
+                            <p class="font-serif text-3xl font-bold text-brand-navy">高校生以上</p>
+                            <p class="font-sans text-sm text-gray-500 mt-2 font-bold">(未経験、ブランクOK / 真剣にやりたい方)</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                            <i data-lucide="map-pin" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
+                                <span class="text-brand-gold mr-2">✦</span>活動場所
+                            </h3>
+                            <p class="font-serif text-2xl font-bold text-brand-navy leading-relaxed">
+                                茨木市周辺のグラウンド、<br class="sm:hidden">フットサルコート
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                            <i data-lucide="calendar" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
+                                <span class="text-brand-gold mr-2">✦</span>活動日時
+                            </h3>
+                            <p class="font-serif text-2xl font-bold text-brand-navy">
+                                土日祝中心 (週1回)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 border-b-2 border-brand-gold/20 shadow-md" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-16 h-16 bg-brand-navy text-brand-goldLight rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                            <i data-lucide="coins" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-navy mb-2 flex items-center justify-center sm:justify-start">
+                                <span class="text-brand-gold mr-2">✦</span>費用
+                            </h3>
+                            <p class="font-serif text-2xl font-bold text-brand-navy">
+                                1回の活動参加につき 500〜1000円
+                            </p>
+                            <p class="font-sans text-sm text-gray-500 mt-2 font-bold">
+                                ※費用につきましてはあくまで目安になりますのでご了承ください
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM -->
+        <section class="py-24 relative bg-brand-navy text-white overflow-hidden">
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-6">参加希望・お問い合わせ</h2>
+                    <p class="font-sans text-lg font-bold text-gray-300">
+                        参加希望の方はお気軽にDM、<br class="sm:hidden">または下記フォームよりご連絡ください！！
+                    </p>
+                    <div class="mt-8">
+                        <a href="https://instagram.com/lien_ibaraki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all shadow-2xl text-lg tracking-wider">
+                            <i data-lucide="instagram" class="w-6 h-6 mr-3 stroke-[2.5]"></i>
+                            InstagramでDMを送る
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-brand-navyDark border-2 border-brand-gold p-6 sm:p-12 shadow-2xl relative overflow-hidden font-sans rounded-sm" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Submit Success Overlay -->
+                    <div id="form-success" class="hidden absolute inset-0 bg-brand-navyDark z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
+                        <div class="w-20 h-20 bg-brand-gold text-brand-navy flex items-center justify-center mb-6 rounded-full shadow-lg shadow-brand-gold/20">
+                            <i data-lucide="check" class="w-10 h-10 stroke-[3]"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-goldLight mb-2">送信が完了しました</h3>
+                        <p class="text-gray-300 mb-8 font-bold max-w-md">
+                            ご応募ありがとうございます。代表より、折り返しメールにてご連絡させていただきます。
+                        </p>
+                        <button onclick="resetContactForm()" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-bold transition-all text-sm tracking-wider">
+                            戻る
+                        </button>
+                    </div>
+
+                    <!-- Submit Error Overlay -->
+                    <div id="form-error" class="hidden absolute inset-0 bg-brand-navyDark z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
+                        <div class="w-20 h-20 bg-red-500/10 text-red-500 flex items-center justify-center mb-6 rounded-full">
+                            <i data-lucide="alert-circle" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-500 mb-2">エラーが発生しました</h3>
+                        <p class="text-gray-300 mb-8 font-bold">
+                            正常に送信できませんでした。FormspreeのURLが正しく設定されているかご確認ください。
+                        </p>
+                        <button onclick="resetContactForm()" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-bold transition-all text-sm">
+                            やり直す
+                        </button>
+                    </div>
+
+                    <form id="contact-form" action="https://formspree.io/f/xanyvryq" method="POST" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-brand-goldLight mb-2">お名前 <span class="text-red-500">*</span></label>
+                                <input type="text" name="お名前" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-brand-goldLight mb-2">年齢 <span class="text-red-500">*</span></label>
+                                <input type="number" name="年齢" required min="15" class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-brand-goldLight mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                                <input type="email" name="email" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-brand-goldLight mb-2">経験の有無 <span class="text-red-500">*</span></label>
+                                <select name="経験の有無" required class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                                    <option value="" class="text-gray-400">選択してください</option>
+                                    <option value="経験者（部活・クラブ等）">経験者（部活・クラブ等）</option>
+                                    <option value="経験者（ブランクあり）">経験者（ブランクあり）</option>
+                                    <option value="未経験・初心者">未経験・初心者</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-brand-goldLight mb-2">メッセージ・質問など</label>
+                            <textarea name="メッセージ・質問など" rows="4" class="w-full bg-brand-navy border border-brand-gold/30 px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
+                        </div>
+
+                        <div class="pt-4 text-center">
+                            <button type="submit" class="w-full sm:w-auto px-16 py-4 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark text-brand-navy font-black hover:brightness-110 transition-all text-lg shadow-xl tracking-widest">
+                                送信する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="text-center mt-16" data-aos="fade-in" data-aos-delay="400">
+                    <p class="font-serif text-2xl font-bold text-brand-goldLight">Lien茨木代表 柳川瀬</p>
+                    <div class="mt-4 flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8 font-sans text-sm text-gray-400">
+                        <a href="mailto:atusimaru.0807@gmail.com" class="flex items-center hover:text-brand-goldLight transition-colors">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2 text-brand-gold"></i> atusimaru.0807@gmail.com
+                        </a>
+                        <a href="tel:08036760807" class="flex items-center hover:text-brand-goldLight transition-colors">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2 text-brand-gold"></i> 080-3676-0807
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- FOOTER -->
     <footer class="bg-brand-navyDark py-16 border-t-2 border-brand-gold/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-            <!-- Footer Emblem Display -->
             <div class="w-20 h-20 mx-auto relative p-0.5 rounded-full bg-gradient-to-r from-brand-gold to-brand-goldLight" data-aos="zoom-in">
                 <div class="w-full h-full bg-brand-navy rounded-full flex items-center justify-center overflow-hidden">
                     <img src="logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.style.display='none';">
@@ -518,39 +602,52 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100,
-        });
-
-        // Initialize Lucide Icons
+        AOS.init({ duration: 800, once: true, offset: 100 });
         lucide.createIcons();
 
         // Header scroll effect
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-2xl');
-                header.classList.add('bg-brand-navy');
+            if (window.scrollY > 20) {
+                header.classList.add('bg-brand-navy', 'shadow-2xl');
             } else {
-                header.classList.remove('shadow-2xl');
+                header.classList.remove('bg-brand-navy', 'shadow-2xl');
             }
         });
 
         // Mobile Nav Toggle
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-        // Contact Form Handling (AJAX Submission)
+        // === SPA (Single Page Application) Tab Switching Logic ===
+        function switchTab(tabId) {
+            // 1. Hide all pages
+            document.querySelectorAll('.page-view').forEach(el => {
+                el.classList.remove('active-view');
+            });
+            // 2. Show selected page
+            document.getElementById('view-' + tabId).classList.add('active-view');
+            
+            // 3. Update Desktop Navigation active states
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Only add active class to standard text links, not the shiny button
+            const activeNavLinks = document.querySelectorAll(`.nav-link[onclick="switchTab('${tabId}')"]`);
+            if(activeNavLinks.length > 0) activeNavLinks[0].classList.add('active');
+
+            // 4. Close mobile menu if open
+            mobileMenu.classList.add('hidden');
+
+            // 5. Scroll to top instantly
+            window.scrollTo(0, 0);
+
+            // 6. Refresh animations so they trigger on the new page
+            setTimeout(() => { AOS.refresh(); }, 100);
+        }
+
+        // Contact Form Handling
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = event.target;
@@ -558,7 +655,6 @@
             const successOverlay = document.getElementById('form-success');
             const errorOverlay = document.getElementById('form-error');
 
-            // FormspreeのURLが未設定の場合、プレビュー用のダミー送信として成功画面を表示する
             if (url.includes("ここにFormspree") || url === "") {
                 successOverlay.classList.remove('hidden');
                 successOverlay.classList.add('flex');
@@ -571,14 +667,7 @@
             submitButton.innerText = "送信中...";
 
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
+                const response = await fetch(url, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
                 if (response.ok) {
                     successOverlay.classList.remove('hidden');
                     successOverlay.classList.add('flex');
